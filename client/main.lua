@@ -35,6 +35,19 @@ Controller = function(data, item)
 	showui = not showui
 end
 
+function GetClosestVehicle(c,dist)
+	local closest = 0
+	for k,v in pairs(GetGamePool('CVehicle')) do
+		local dis = #(GetEntityCoords(v) - c)
+		if dis < dist 
+		    or dist == -1 then
+			closest = v
+			dist = dis
+		end
+	end
+	return closest, dist
+end
+
 exports('Control', Controller)
 
 AddStateBagChangeHandler('height' --[[key filter]], nil --[[bag filter]], function(bagName, key, value, _unused, replicated)
