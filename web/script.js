@@ -9,7 +9,7 @@
             }
         }
     }
-    xhr.open("POST", 'https://renzu_mechanics/nuicb', true)
+    xhr.open("POST", 'https://renzu_controller/nuicb', true)
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data))
 }

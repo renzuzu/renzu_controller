@@ -187,3 +187,16 @@ NeonCustom = function(type)
 end
 
 RegisterCommand('controller', Controller)
+
+SetEntityControlable = function(entity) -- server based entities. incase you are not the owner. server entities are a little complicated
+    local netid = NetworkGetNetworkIdFromEntity(entity)
+    SetNetworkIdExistsOnAllMachines(netid,true)
+    SetEntityAsMissionEntity(entity,true,true)
+    NetworkRequestControlOfEntity(entity)
+    local attempt = 0
+    while not NetworkHasControlOfEntity(entity) and attempt < 2000 and DoesEntityExist(entity) do
+        NetworkRequestControlOfEntity(entity)
+        Citizen.Wait(0)
+        attempt = attempt + 1
+    end
+end
