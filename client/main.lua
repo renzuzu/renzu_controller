@@ -20,7 +20,7 @@ Controller = function(data, item)
 		})
 		return
 	end
-	local saved = not hasdata and lib.callback.await('renzu_mechanics:SetController', 100, {plate = plate, slot = item.slot})
+	local saved = not hasdata and lib.callback.await('renzu_controller:SetController', 100, {plate = plate, slot = item.slot})
 	SendNUIMessage({ show = not showui, plate = plate})
 	SetNuiFocus(not showui,not showui)
 	SetNuiFocusKeepInput(false)
