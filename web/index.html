@@ -1,0 +1,362 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>CONTROLLER</title> 
+  <script src="https://kit.fontawesome.com/e2ac9cc532.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css" id="css_default">
+</head>
+
+<body translate="no" id="body" style="display: none;">
+  <div class="card card:smert">
+    <div class="display:flex top">
+        <div class="top:left display:flex">
+            <div class="icon:card icon:lamp">
+                <svg width="26" height="26">
+                    <use xlink:href="#bulb" />
+                </svg>
+            </div>
+            <div class="text:card">
+                <h2 class="link title:card" id="plate">Nissan Skyline</h2>
+                <p class="desc:card">Vehicle Extras Control</p>
+            </div>
+        </div>
+        <div class="top:right">
+            <div class="input:switch">
+                <input type="checkbox" class="hide" id="switch" onclick="ToggleNeon()" checked>
+                <p class="indicator:text"></p>
+                <label for="switch" class="switch:indicator">
+                    <div class="switch">
+                        <div class="dot"></div>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="after:top display:flex">
+        <p class="text:sector">Height</p>
+        <div class="input:switch">
+            <input type="checkbox" class="hide" id="dimming" onclick="ToggleLights()" checked>
+            <p class="indicator:text dimming"></p>
+            <label for="dimming" class="switch:indicator">
+                <div class="switch dimming">
+                    <div class="dot"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="range:slide">
+        <div class="grid:slide">
+            <svg width="20" height="20" class="slider:down">
+                <use xlink:href="#sun" />
+            </svg>
+            <input type="range" name="" id="range" value="" step=0.001 min=-0.1 max=0.9 value=0>
+            <svg width="26" height="26">
+                <use xlink:href="#sun" />
+            </svg>
+        </div>
+    </div>
+    
+    <form name = 'neon'>
+    <div class="neoncolor:section">
+      <p class="text:sector">Neon Lights neoncolor</p>
+      <div class="neoncolors:grid">
+          <div class="neoncolor">
+              <input type="radio" name="neoncolor" class="hide neoncolor:sel" id="neonwhite" value="white">
+              <label for="neonwhite" class="neoncolor:label white">
+                  <svg width="18" height="18">
+                      <use xlink:href="#check" />
+                  </svg>
+              </label>
+          </div>
+          <div class="neoncolor">
+              <input type="radio" name="neoncolor" class="hide neoncolor:sel" id="neonorange" value="orange" checked>
+              <label for="neonorange" class="neoncolor:label orange">
+                  <svg width="18" height="18">
+                      <use xlink:href="#check" />
+                  </svg>
+              </label>
+          </div>
+          <div class="neoncolor">
+              <input type="radio" name="neoncolor" class="hide neoncolor:sel" id="neonblack" value="black">
+              <label for="neonblack" class="neoncolor:label black">
+                  <svg width="18" height="18">
+                      <use xlink:href="#check" />
+                  </svg>
+              </label>
+          </div>
+          <div class="neoncolor">
+              <input type="radio" name="neoncolor" class="hide neoncolor:sel" id="neonblue" value="blue">
+              <label for="neonblue" class="neoncolor:label blue">
+                  <svg width="18" height="18">
+                      <use xlink:href="#check" />
+                  </svg>
+              </label>
+          </div>
+          <div class="neoncolor">
+              <input type="radio" name="neoncolor" class="hide neoncolor:sel" id="neoncyan" value="cyan">
+              <label for="neoncyan" class="neoncolor:label cyan">
+                  <svg width="18" height="18">
+                      <use xlink:href="#check" />
+                  </svg>
+              </label>
+          </div>
+          <div class="neoncolor">
+              <input type="radio" name="neoncolor" class="hide neoncolor:sel" id="neonpurple" value="purple">
+              <label for="neonpurple" class="neoncolor:label purple">
+                  <svg width="18" height="18">
+                      <use xlink:href="#check" />
+                  </svg>
+              </label>
+          </div>
+          <div class="neoncolor">
+              <input type="radio" name="neoncolor" class="hide neoncolor:sel" id="neonred" value="red">
+              <label for="neonred" class="neoncolor:label red">
+                  <svg width="18" height="18">
+                      <use xlink:href="#check" />
+                  </svg>
+              </label>
+          </div>
+          <div class="neoncolor">
+              <input type="radio" class="hide neoncolor:sel">
+              <label class="neoncolor:label no">
+                <input type="color" id="customneon" value="#ff0000" style="
+    height: 28px;
+    width: 28px;
+    border-radius: 100px;
+    overflow: hidden;
+    position: absolute;
+">
+                  <svg width="18" height="18">
+                      <use xlink:href="#plus" />
+                  </svg>
+              </label>
+          </div>
+      </div>
+  </div>
+</form>
+
+    <div class="scene:section">
+        <p class="text:sector">Neon Options</p>
+        <div class="labels:scene">
+            <div class="scene:label">
+                <input type="radio" name="scene" id="none" class="hide scene" checked>
+                <label for="none" class="lbl" onclick="SetNeonStyle('default')">
+                    Default
+                </label>  
+            </div>
+            <div class="scene:label">
+                <input type="radio" name="scene" id="sleeping" class="hide scene">
+                <label for="sleeping" class="lbl" onclick="SetNeonStyle('neon1')">
+                    2 Way Blinking
+                </label>  
+            </div>
+            <div class="scene:label">
+                <input type="radio" name="scene" id="reading" class="hide scene">
+                <label for="reading" class="lbl" onclick="SetNeonStyle('neon2')">
+                  3 Way Blinking
+                </label>  
+            </div>
+            <div class="scene:label">
+                <input type="radio" name="scene" id="working" class="hide scene">
+                <label for="working" class="lbl" onclick="SetNeonStyle('random')">
+                  Random
+                </label>  
+            </div>
+            <div class="scene:label">
+                <input type="radio" class="hide" id="no">
+                <label for="no" class="add">
+                    <svg width="18" height="18">
+                        <use xlink:href="#plus" />
+                    </svg>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <form name = 'headlight'>
+
+    <div class="color:section">
+      <p class="text:sector">Head Lights Color</p>
+      <div class="colors:grid">
+          <div class="color">
+              <input type="radio" name="color" class="hide color:sel" id="white" value="white">
+              <label for="white" class="color:label white">
+                  <svg width="18" height="18">
+                      <use xlink:href="#check" />
+                  </svg>
+              </label>
+          </div>
+          <div class="color">
+              <input type="radio" name="color" class="hide color:sel" id="orange" value="orange" checked>
+              <label for="orange" class="color:label orange">
+                  <svg width="18" height="18">
+                      <use xlink:href="#check" />
+                  </svg>
+              </label>
+          </div>
+          <div class="color">
+              <input type="radio" name="color" class="hide color:sel" id="black" value="black">
+              <label for="black" class="color:label black">
+                  <svg width="18" height="18">
+                      <use xlink:href="#check" />
+                  </svg>
+              </label>
+          </div>
+          <div class="color">
+              <input type="radio" name="color" class="hide color:sel" id="blue" value="blue">
+              <label for="blue" class="color:label blue">
+                  <svg width="18" height="18">
+                      <use xlink:href="#check" />
+                  </svg>
+              </label>
+          </div>
+          <div class="color">
+              <input type="radio" name="color" class="hide color:sel" id="cyan" value="cyan">
+              <label for="cyan" class="color:label cyan">
+                  <svg width="18" height="18">
+                      <use xlink:href="#check" />
+                  </svg>
+              </label>
+          </div>
+          <div class="color">
+              <input type="radio" name="color" class="hide color:sel" id="purple" value="purple">
+              <label for="purple" class="color:label purple">
+                  <svg width="18" height="18">
+                      <use xlink:href="#check" />
+                  </svg>
+              </label>
+          </div>
+          <div class="color">
+              <input type="radio" name="color" class="hide color:sel" id="red" value="red">
+              <label for="red" class="color:label red">
+                  <svg width="18" height="18">
+                      <use xlink:href="#check" />
+                  </svg>
+              </label>
+          </div>
+          <div class="color">
+              <input type="radio" class="hide color:sel">
+              <label class="color:label no">
+                <input type="color" id="customheadlight" value="#ff0000" style="
+    height: 28px;
+    width: 28px;
+    border-radius: 100px;
+    overflow: hidden;
+    position: absolute;
+">
+                  <svg width="18" height="18">
+                      <use xlink:href="#plus" />
+                  </svg>
+              </label>
+          </div>
+      </div>
+  </div>
+  </form>
+
+</div>
+
+
+
+
+
+
+<svg class="hide">
+    <symbol fill="none" viewBox="0 0 24 24" stroke="currentColor" id="check">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+    </symbol>
+    <symbol fill="none" viewBox="0 0 24 24" stroke="currentColor" id="plus">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+    </symbol>
+    <symbol fill="currentColor" viewBox="0 0 24 24" stroke="currentColor" id="sun">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+        </path>
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="bulb"
+        x="0px" y="0px" viewBox="0 0 512 512" fill="currentColor" style="enable-background:new 0 0 512 512;"
+        xml:space="preserve">
+        <g>
+            <g>
+                <path
+                    d="M388.56,192.8c-18.579-18.499-40.358-32.648-64.077-41.919V84.116H271V0h-30v84.116h-53.483v66.765    c-23.719,9.27-45.498,23.419-64.077,41.919c-31.96,31.84-51.09,73.18-54.69,117.68h374.5    C439.65,265.98,420.52,224.64,388.56,192.8z" />
+            </g>
+        </g>
+        <g>
+            <g>
+                <rect x="241" y="450.65" width="30" height="61.35" />
+            </g>
+        </g>
+        <g>
+            <g>
+
+                <rect x="342.883" y="412.78" transform="matrix(0.7597 -0.6503 0.6503 0.7597 -202.3702 339.2961)"
+                    width="30.001" height="61.351" />
+            </g>
+        </g>
+        <g>
+            <g>
+
+                <rect x="123.461" y="428.485" transform="matrix(0.6503 -0.7596 0.7596 0.6503 -282.9958 272.1567)"
+                    width="61.346" height="29.998" />
+            </g>
+        </g>
+        <g>
+            <g>
+                <path
+                    d="M167.24,340.48c7.47,42.21,44.5,74.43,88.76,74.43s81.29-32.22,88.76-74.43l-177.58-0.36    C167.19,340.24,167.22,340.36,167.24,340.48z" />
+            </g>
+        </g>
+        <g>
+        </g>
+        <g>
+        </g>
+        <g>
+        </g>
+        <g>
+        </g>
+        <g>
+        </g>
+        <g>
+        </g>
+        <g>
+        </g>
+        <g>
+        </g>
+        <g>
+        </g>
+        <g>
+        </g>
+        <g>
+        </g>
+        <g>
+        </g>
+        <g>
+        </g>
+        <g>
+        </g>
+        <g>
+        </g>
+    </symbol>
+    <symbol viewBox="0 0 24 24" stroke="currentColor" fill="var(--color-svg)" id="heart">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width=".4"
+            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+        </path>
+    </symbol>
+    <symbol viewBox="0 0 24 24" stroke="currentColor" fill="var(--color-svg)" id="icon-star">
+        <path stroke-linecap="square" stroke-linejoin="square" stroke-width=".4"
+            d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
+        </path>
+    </symbol>
+    <symbol fill="var(--color-svg)" viewBox="0 0 24 24" stroke="currentColor" id="icon-bookmark">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width=".4"
+            d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+    </symbol>
+    <symbol fill="var(--color-svg)" viewBox="0 0 24 24" stroke="currentColor" id="moon">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width=".4"
+            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+    </symbol>
+</svg>
+<script src="script.js"></script>
+</body></html>
