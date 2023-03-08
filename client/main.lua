@@ -2,6 +2,7 @@ local showui = false
 Controller = function(data, item)
 	local closestvehicle = GetClosestVehicle(GetEntityCoords(cache.ped), 6.0)
 	if not DoesEntityExist(closestvehicle) then return end
+	if GetVehicleDoorLockStatus(closestvehicle) ~= 1 then return end
 	local plate = string.gsub(GetVehicleNumberPlateText(closestvehicle), '^%s*(.-)%s*$', '%1'):upper()
 	if config.item then
 		local controllers = exports.ox_inventory:Search('slots', 'vehiclecontroller')
