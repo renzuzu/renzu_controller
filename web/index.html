@@ -54,6 +54,52 @@
         </div>
     </div>
     
+    
+  <form name="carcontrol">
+
+    <div class="color:section">
+      <p class="text:sector">Doors and Seats</p>
+      <div class="colors:grid" style="flex-wrap: wrap; justify-content: flex-start;">
+           <div class="icon_container">
+              <img src="image/doorFrontLeft.png" class="iconcar" id="doorleft" onclick="setcontrol('door',0)">
+            </div>
+            <div class="icon_container">
+                <img src="image/doorFrontRight.png" class="iconcar" onclick="setcontrol('door',1)">
+            </div>
+            <div class="icon_container">
+                <img src="image/Seat.png" class="iconcar" onclick="setcontrol('seat',-1)">
+            </div>
+            <div class="icon_container">
+                <img src="image/Seat.png" class="iconcar" onclick="setcontrol('seat',0)">
+            </div>
+            <div class="icon_container">
+                <img src="image/frontHood.png" class="iconcar" onclick="setcontrol('door',4)">
+            </div>
+            <div class="icon_container">
+                <img src="image/rearHood.png" class="iconcar" onclick="setcontrol('door',5)">
+            </div>
+          <div class="icon_container">
+            <img src="image/doorRearLeft.png" class="iconcar" onclick="setcontrol('door',2)">
+            </div>
+            <div class="icon_container">
+                <img src="image/doorRearRight.png" class="iconcar" onclick="setcontrol('door',3)">
+            </div>
+            <div class="icon_container">
+                <img src="image/Seat.png" class="iconcar" onclick="setcontrol('seat',1)">
+            </div>
+            <div class="icon_container">
+                <img src="image/Seat.png" class="iconcar" onclick="setcontrol('seat',2)">
+            </div>
+            <div class="icon_container">
+                <img src="image/interiorLight.png" class="iconcar" onclick="setcontrol('interiorlight')">
+            </div>
+            <div class="icon_container">
+                <i class="fas fa-sync-alt" onclick="setcontrol('toggleall')" style="padding: 13px;font-size: 30px;cursor: pointer;"></i>
+            </div>
+      </div>
+  </div>
+  </form>
+
     <form name = 'neon'>
     <div class="neoncolor:section">
       <p class="text:sector">Neon Lights neoncolor</p>
@@ -235,51 +281,6 @@
                   </svg>
               </label>
           </div>
-      </div>
-  </div>
-  </form>
-
-  <form name="carcontrol">
-
-    <div class="color:section">
-      <p class="text:sector">Other Controls</p>
-      <div class="colors:grid" style="flex-wrap: wrap; justify-content: flex-start;">
-           <div class="icon_container">
-              <img src="image/doorFrontLeft.png" class="iconcar" id="doorleft" onclick="setcontrol('door',0)">
-            </div>
-            <div class="icon_container">
-                <img src="image/doorFrontRight.png" class="iconcar" onclick="setcontrol('door',1)">
-            </div>
-            <div class="icon_container">
-                <img src="image/Seat.png" class="iconcar" onclick="setcontrol('seat',-1)">
-            </div>
-            <div class="icon_container">
-                <img src="image/Seat.png" class="iconcar" onclick="setcontrol('seat',0)">
-            </div>
-            <div class="icon_container">
-                <img src="image/frontHood.png" class="iconcar" onclick="setcontrol('door',4)">
-            </div>
-            <div class="icon_container">
-                <img src="image/rearHood.png" class="iconcar" onclick="setcontrol('door',5)">
-            </div>
-          <div class="icon_container">
-            <img src="image/doorRearLeft.png" class="iconcar" onclick="setcontrol('door',2)">
-            </div>
-            <div class="icon_container">
-                <img src="image/doorRearRight.png" class="iconcar" onclick="setcontrol('door',3)">
-            </div>
-            <div class="icon_container">
-                <img src="image/Seat.png" class="iconcar" onclick="setcontrol('seat',1)">
-            </div>
-            <div class="icon_container">
-                <img src="image/Seat.png" class="iconcar" onclick="setcontrol('seat',2)">
-            </div>
-            <div class="icon_container">
-                <img src="image/interiorLight.png" class="iconcar" onclick="setcontrol('interiorlight')">
-            </div>
-            <div class="icon_container">
-                <i class="fas fa-sync-alt" onclick="setcontrol('toggleall')" style="padding: 13px;font-size: 30px;cursor: pointer;"></i>
-            </div>
       </div>
   </div>
   </form>
