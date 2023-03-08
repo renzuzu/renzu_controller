@@ -23,9 +23,9 @@ function setcontrol(type,index) {
 window.addEventListener('message', function (table) {
     let event = table.data;
     if (event.show) {
-        getEl('body').style.display = 'block'
+        getEl('body').style.opacity = '1.0'
     } else if (event.show == false) {
-        getEl('body').style.display = 'none'
+        getEl('body').style.opacity = '0.0'
     }
 
     if (event.plate) {

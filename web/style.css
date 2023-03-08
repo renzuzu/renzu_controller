@@ -51,6 +51,7 @@ body {
   justify-content: center;
   flex-direction: column;
   color: var(--text-color);
+  transition: opacity 500ms ease;
 }
 body,
 body html {
