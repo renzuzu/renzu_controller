@@ -11,9 +11,9 @@
     <div class="display:flex top">
         <div class="top:left display:flex">
             <div class="icon:card icon:lamp">
-                <svg width="26" height="26">
-                    <use xlink:href="#bulb" />
-                </svg>
+                <div class="icon_container">
+                    <i class="fas fa-power-off" onclick="setcontrol('engine')" style="padding: 13px;font-size: 30px;cursor: pointer;" aria-hidden="true"></i>
+                </div>
             </div>
             <div class="text:card">
                 <h2 class="link title:card" id="plate">Nissan Skyline</h2>
@@ -48,13 +48,9 @@
 
     <div class="range:slide">
         <div class="grid:slide">
-            <svg width="20" height="20" class="slider:down">
-                <use xlink:href="#sun" />
-            </svg>
+            <i class="fas fa-chevron-down"></i>
             <input type="range" name="" id="range" value="" step=0.001 min=-0.1 max=0.9 value=0>
-            <svg width="26" height="26">
-                <use xlink:href="#sun" />
-            </svg>
+            <i class="fas fa-chevron-up"></i>
         </div>
     </div>
     
@@ -121,13 +117,7 @@
           <div class="neoncolor">
               <input type="radio" class="hide neoncolor:sel">
               <label class="neoncolor:label no">
-                <input type="color" id="customneon" value="#ff0000" style="
-    height: 28px;
-    width: 28px;
-    border-radius: 100px;
-    overflow: hidden;
-    position: absolute;
-">
+                <input type="color" id="customneon" value="#ff0000" style="height: 28px;width: 28px;border-radius: 100px;overflow: hidden;position: absolute;">
                   <svg width="18" height="18">
                       <use xlink:href="#plus" />
                   </svg>
@@ -239,18 +229,57 @@
           <div class="color">
               <input type="radio" class="hide color:sel">
               <label class="color:label no">
-                <input type="color" id="customheadlight" value="#ff0000" style="
-    height: 28px;
-    width: 28px;
-    border-radius: 100px;
-    overflow: hidden;
-    position: absolute;
-">
+                <input type="color" id="customheadlight" value="#ff0000" style="height: 28px;width: 28px;border-radius: 100px;overflow: hidden;position: absolute;">
                   <svg width="18" height="18">
                       <use xlink:href="#plus" />
                   </svg>
               </label>
           </div>
+      </div>
+  </div>
+  </form>
+
+  <form name="carcontrol">
+
+    <div class="color:section">
+      <p class="text:sector">Other Controls</p>
+      <div class="colors:grid" style="flex-wrap: wrap; justify-content: flex-start;">
+           <div class="icon_container">
+              <img src="image/doorFrontLeft.png" class="iconcar" id="doorleft" onclick="setcontrol('door',0)">
+            </div>
+            <div class="icon_container">
+                <img src="image/doorFrontRight.png" class="iconcar" onclick="setcontrol('door',1)">
+            </div>
+            <div class="icon_container">
+                <img src="image/Seat.png" class="iconcar" onclick="setcontrol('seat',-1)">
+            </div>
+            <div class="icon_container">
+                <img src="image/Seat.png" class="iconcar" onclick="setcontrol('seat',0)">
+            </div>
+            <div class="icon_container">
+                <img src="image/frontHood.png" class="iconcar" onclick="setcontrol('door',4)">
+            </div>
+            <div class="icon_container">
+                <img src="image/rearHood.png" class="iconcar" onclick="setcontrol('door',5)">
+            </div>
+          <div class="icon_container">
+            <img src="image/doorRearLeft.png" class="iconcar" onclick="setcontrol('door',2)">
+            </div>
+            <div class="icon_container">
+                <img src="image/doorRearRight.png" class="iconcar" onclick="setcontrol('door',3)">
+            </div>
+            <div class="icon_container">
+                <img src="image/Seat.png" class="iconcar" onclick="setcontrol('seat',1)">
+            </div>
+            <div class="icon_container">
+                <img src="image/Seat.png" class="iconcar" onclick="setcontrol('seat',2)">
+            </div>
+            <div class="icon_container">
+                <img src="image/interiorLight.png" class="iconcar" onclick="setcontrol('interiorlight')">
+            </div>
+            <div class="icon_container">
+                <i class="fas fa-sync-alt" onclick="setcontrol('toggleall')" style="padding: 13px;font-size: 30px;cursor: pointer;"></i>
+            </div>
       </div>
   </div>
   </form>

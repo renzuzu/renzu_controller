@@ -10,10 +10,12 @@ client_scripts {
 	'client/main.lua'
 }
 server_scripts {
+	'config.lua',
 	'server/main.lua'
 }
 files {
 	'web/index.html',
 	'web/script.js',
 	'web/style.css',
+	'web/image/*.png',
 }

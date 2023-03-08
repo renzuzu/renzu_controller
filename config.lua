@@ -1,5 +1,5 @@
 config = {}
-
+config.item = false -- if true, controller need item else standalone
 config.colors = {
 	[1] = {label = 'White', r = 222, g = 222, b = 255},
 	[2] = {label = 'Electric Blue', r = 2, g = 21, b = 255},

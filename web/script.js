@@ -1,6 +1,6 @@
 
 
- async function SendData(data,cb) {
+function SendData(data,cb) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -15,8 +15,11 @@
 }
 let getEl = function( id ) { return document.getElementById( id )}
  
+function setcontrol(type,index) {
+    console.log(type,index)
+    return SendData({msg: 'carcontrol', type: type, index: index})
+} 
 
-let pedshots = {}
 window.addEventListener('message', function (table) {
     let event = table.data;
     if (event.show) {
@@ -76,14 +79,11 @@ for(var i = 0; i < rad2.length; i++) {
     };
 }
 
-document.onkeyup = function (data) {
-    if (data.keyCode == '27') {
-        SendData({msg: 'close'})
+document.addEventListener("keydown", (event) => {
+    if (event.keyCode == 27 || event.keyCode === 36 || event.keyCode === 8) {
+      return SendData({msg: 'close'})
     }
-    if (data.keyCode == '121') {
-        SendData({msg: 'close'})
-    }
-}
+});
 
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);

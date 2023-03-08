@@ -2,25 +2,28 @@ local showui = false
 Controller = function(data, item)
 	local closestvehicle = GetClosestVehicle(GetEntityCoords(cache.ped), 10.0)
 	local plate = string.gsub(GetVehicleNumberPlateText(closestvehicle), '^%s*(.-)%s*$', '%1'):upper()
-	local controllers = exports.ox_inventory:Search('slots', 'vehiclecontroller')
-	local hasdata = true
-	local metadata = {}
-	for _, v in pairs(controllers) do
-		if item.slot == v.slot and v.metadata and v.metadata.plate == nil or item.slot == v.slot and v.metadata == nil then
-			hasdata = false
+	if config.item then
+		local controllers = exports.ox_inventory:Search('slots', 'vehiclecontroller')
+		local hasdata = true
+		local metadata = {}
+		if not controllers then print('no item installed') return end
+		for _, v in pairs(controllers) do
+			if item.slot == v.slot and v.metadata and v.metadata.plate == nil or item.slot == v.slot and v.metadata == nil then
+				hasdata = false
+			end
+			if item.slot == v.slot and v.metadata and v.metadata.plate then
+				metadata.plate = v.metadata.plate
+			end
 		end
-		if item.slot == v.slot and v.metadata and v.metadata.plate then
-			metadata.plate = v.metadata.plate
+		if hasdata and metadata.plate and metadata.plate ~= plate then
+			lib.notify({
+				title = 'This Remote is already registered in other vehicle : Plate - '..metadata.plate,
+				type = 'error'
+			})
+			return
 		end
+		local saved = not hasdata and lib.callback.await('renzu_controller:SetController', 100, {plate = plate, slot = item.slot})
 	end
-	if hasdata and metadata.plate and metadata.plate ~= plate then
-		lib.notify({
-			title = 'This Remote is already registered in other vehicle : Plate - '..metadata.plate,
-			type = 'error'
-		})
-		return
-	end
-	local saved = not hasdata and lib.callback.await('renzu_controller:SetController', 100, {plate = plate, slot = item.slot})
 	SendNUIMessage({ show = not showui, plate = plate})
 	SetNuiFocus(not showui,not showui)
 	SetNuiFocusKeepInput(false)
@@ -59,6 +62,71 @@ AddStateBagChangeHandler('height' --[[key filter]], nil --[[bag filter]], functi
 		SetVehicleSuspensionHeight(NetworkGetEntityFromNetworkId(net),tonumber(value))
 	end
 end)
+
+SetVehicleControl = function(vehicle,data)
+	local state = GetVehicleStates(vehicle,data)
+	if data.type == 'seat' then
+		print(GetVehicleDoorAngleRatio(vehicle,data.index))
+		return SetPedIntoVehicle(cache.ped,vehicle,data.index)
+	elseif data.type == 'door' then
+		if state > 0.0 then
+			SetVehicleDoorShut(vehicle,data.index,false)
+		else
+			SetVehicleDoorOpen(vehicle,data.index,false)
+		end
+	elseif data.type == 'interiorlight' then
+		SetVehicleInteriorlight(vehicle, not state)
+	elseif data.type == 'toggleall' then
+		for i = -1, 6 do
+			local state = GetVehicleStates(vehicle,{type = 'door', index = i})
+			if state > 0.0 then
+				SetVehicleDoorShut(vehicle,i,false)
+			else
+				SetVehicleDoorOpen(vehicle,i,false)
+			end
+		end
+	elseif data.type == 'engine' then
+		SetVehicleEngineOn(vehicle, not GetIsVehicleEngineRunning(vehicle), false, true)
+	end
+end
+
+GetVehicleStates = function(vehicle,data)
+	if data.type == 'door' then
+		print(GetVehicleDoorAngleRatio(vehicle,data.index))
+		return GetVehicleDoorAngleRatio(vehicle,data.index)
+	elseif data.type == 'seat' then
+		return IsVehicleSeatFree(vehicle,data.index)
+	elseif data.type == 'interiorlight' then
+		return IsVehicleInteriorLightOn(vehicle)
+	end
+end
+
+RegisterCommand('engine', function(src,args)
+	SetVehicleEngineOn(cache.vehicle, not GetIsVehicleEngineRunning(cache.vehicle), false, true)
+end)
+
+RegisterCommand('seat', function(src,args)
+	SetPedIntoVehicle(cache.ped,cache.vehicle,tonumber(args[1]))
+end)
+
+RegisterCommand('door', function(src,args)
+	local index = tonumber(args[1])
+	local vehicle = cache.vehicle
+	local state = GetVehicleStates(vehicle,{type = 'door', index = index})
+	if state > 0.0 then
+		SetVehicleDoorShut(vehicle,index,false)
+	else
+		SetVehicleDoorOpen(vehicle,index,false)
+	end
+end)
+
+RegisterCommand('carcontrol', function(src,args)
+	print('gago')
+	if config.item then return end
+	return Controller()
+end)
+
+RegisterKeyMapping('carcontrol', 'Vehicle Controller', 'keyboard', 'HOME')
 
 RegisterNUICallback('nuicb', function(data, cb)
 	local closestvehicle = GetClosestVehicle(GetEntityCoords(cache.ped), 10.0)
@@ -105,6 +173,11 @@ RegisterNUICallback('nuicb', function(data, cb)
 		SetNuiFocusKeepInput(false)
 		showui = false
 	end
+	if data.msg == 'carcontrol' then
+		print(json.encode(data,{indent = true}))
+		SetVehicleControl(closestvehicle,data)
+	end
+	cb(1)
 end)
 
 local currentype = {}
