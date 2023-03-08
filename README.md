@@ -16,3 +16,11 @@ Fivem Vehicle Controller. Change Neon Colors, Xenon Headlights color , Vehicle H
 # Install
 - goto /renzu_controller/ox_inventory
 - install the items and image
+
+# Commands
+- /seat (0-4)
+- /engine
+- /door (-1 - 6)
+- /carcontrol
+# Keybinds
+- Default Home
