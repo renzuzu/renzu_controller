@@ -121,12 +121,11 @@ RegisterCommand('door', function(src,args)
 end)
 
 RegisterCommand('carcontrol', function(src,args)
-	print('gago')
 	if config.item then return end
 	return Controller()
 end)
 
-RegisterKeyMapping('carcontrol', 'Vehicle Controller', 'keyboard', 'HOME')
+RegisterKeyMapping('carcontrol', 'Vehicle Controller', 'keyboard', config.keybind)
 
 RegisterNUICallback('nuicb', function(data, cb)
 	local closestvehicle = GetClosestVehicle(GetEntityCoords(cache.ped), 10.0)
