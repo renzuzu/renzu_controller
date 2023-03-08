@@ -24,3 +24,6 @@ Fivem Vehicle Controller. Change Neon Colors, Xenon Headlights color , Vehicle H
 - /carcontrol
 # Keybinds
 - Default Home
+
+# icons taken from
+- https://github.com/Manvaril/vehcontrol/tree/master/html/img
