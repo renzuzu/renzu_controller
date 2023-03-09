@@ -103,17 +103,26 @@ GetVehicleStates = function(vehicle,data)
 	end
 end
 
+local vehicle = nil
+AddEventHandler('gameEventTriggered', function (name, args)
+	if name == 'CEventNetworkPlayerEnteredVehicle' then
+		if args[1] == PlayerId() then
+			vehicle = args[2]
+		end
+	end
+end)
+
 RegisterCommand('engine', function(src,args)
-	SetVehicleEngineOn(cache.vehicle, not GetIsVehicleEngineRunning(cache.vehicle), false, true)
+	SetVehicleEngineOn(vehicle, not GetIsVehicleEngineRunning(vehicle), false, true)
 end)
 
 RegisterCommand('seat', function(src,args)
-	SetPedIntoVehicle(PlayerPedId(),cache.vehicle,tonumber(args[1]))
+	SetPedIntoVehicle(PlayerPedId(),vehicle,tonumber(args[1]))
 end)
 
 RegisterCommand('door', function(src,args)
 	local index = tonumber(args[1])
-	local vehicle = cache.vehicle
+	local vehicle = vehicle
 	local state = GetVehicleStates(vehicle,{type = 'door', index = index})
 	if state > 0.0 then
 		SetVehicleDoorShut(vehicle,index,false)
