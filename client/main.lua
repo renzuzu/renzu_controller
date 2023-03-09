@@ -1,6 +1,6 @@
 local showui = false
 Controller = function(data, item)
-	local closestvehicle = GetClosestVehicle(GetEntityCoords(cache.ped), 6.0)
+	local closestvehicle = GetClosestVehicle(GetEntityCoords(PlayerPedId()), 6.0)
 	if not DoesEntityExist(closestvehicle) then return end
 	if GetVehicleDoorLockStatus(closestvehicle) ~= 1 then return end
 	local plate = string.gsub(GetVehicleNumberPlateText(closestvehicle), '^%s*(.-)%s*$', '%1'):upper()
@@ -69,7 +69,7 @@ SetVehicleControl = function(vehicle,data)
 	local state = GetVehicleStates(vehicle,data)
 	if data.type == 'seat' then
 		print(GetVehicleDoorAngleRatio(vehicle,data.index))
-		return SetPedIntoVehicle(cache.ped,vehicle,data.index)
+		return SetPedIntoVehicle(PlayerPedId(),vehicle,data.index)
 	elseif data.type == 'door' then
 		if state > 0.0 then
 			SetVehicleDoorShut(vehicle,data.index,false)
@@ -108,7 +108,7 @@ RegisterCommand('engine', function(src,args)
 end)
 
 RegisterCommand('seat', function(src,args)
-	SetPedIntoVehicle(cache.ped,cache.vehicle,tonumber(args[1]))
+	SetPedIntoVehicle(PlayerPedId(),cache.vehicle,tonumber(args[1]))
 end)
 
 RegisterCommand('door', function(src,args)
@@ -130,7 +130,7 @@ end)
 RegisterKeyMapping('carcontrol', 'Vehicle Controller', 'keyboard', config.keybind)
 
 RegisterNUICallback('nuicb', function(data, cb)
-	local closestvehicle = GetClosestVehicle(GetEntityCoords(cache.ped), 10.0)
+	local closestvehicle = GetClosestVehicle(GetEntityCoords(PlayerPedId()), 10.0)
 	SetEntityControlable(closestvehicle)
 	SetVehicleModKit(closestvehicle,0)
 	if data.msg == 'height' then
@@ -184,7 +184,7 @@ end)
 local currentype = {}
 local type = nil
 NeonCustom = function(type)
-	local closestvehicle = GetClosestVehicle(GetEntityCoords(cache.ped), 10.0)
+	local closestvehicle = GetClosestVehicle(GetEntityCoords(PlayerPedId()), 10.0)
 	local plate = string.gsub(GetVehicleNumberPlateText(closestvehicle), '^%s*(.-)%s*$', '%1'):upper()
 	currentype[plate] = type
 	if type == 'neon1' then
