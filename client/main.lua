@@ -4,6 +4,7 @@ Controller = function(data, item)
 	if not DoesEntityExist(closestvehicle) then return end
 	if GetVehicleDoorLockStatus(closestvehicle) ~= 1 then return end
 	local plate = string.gsub(GetVehicleNumberPlateText(closestvehicle), '^%s*(.-)%s*$', '%1'):upper()
+	local saved
 	if config.item then
 		local controllers = exports.ox_inventory:Search('slots', 'vehiclecontroller')
 		local hasdata = true
@@ -24,7 +25,7 @@ Controller = function(data, item)
 			})
 			return
 		end
-		local saved = not hasdata and lib.callback.await('renzu_controller:SetController', 100, {plate = plate, slot = item.slot})
+		saved = not hasdata and lib.callback.await('renzu_controller:SetController', 100, {plate = plate, slot = item.slot})
 	end
 	SendNUIMessage({ show = not showui, plate = plate})
 	SetNuiFocus(not showui,not showui)
@@ -68,7 +69,6 @@ end)
 SetVehicleControl = function(vehicle,data)
 	local state = GetVehicleStates(vehicle,data)
 	if data.type == 'seat' then
-		print(GetVehicleDoorAngleRatio(vehicle,data.index))
 		return SetPedIntoVehicle(PlayerPedId(),vehicle,data.index)
 	elseif data.type == 'door' then
 		if state > 0.0 then
@@ -94,7 +94,6 @@ end
 
 GetVehicleStates = function(vehicle,data)
 	if data.type == 'door' then
-		print(GetVehicleDoorAngleRatio(vehicle,data.index))
 		return GetVehicleDoorAngleRatio(vehicle,data.index)
 	elseif data.type == 'seat' then
 		return IsVehicleSeatFree(vehicle,data.index)
@@ -143,7 +142,6 @@ RegisterNUICallback('nuicb', function(data, cb)
 	SetEntityControlable(closestvehicle)
 	SetVehicleModKit(closestvehicle,0)
 	if data.msg == 'height' then
-		print(data.val)
 		SetVehicleSuspensionHeight(closestvehicle,-tonumber(data.val)+0.01)
 		local ent = Entity(closestvehicle).state
 		ent:set('height',-tonumber(data.val)+0.01, true)
@@ -184,7 +182,6 @@ RegisterNUICallback('nuicb', function(data, cb)
 		showui = false
 	end
 	if data.msg == 'carcontrol' then
-		print(json.encode(data,{indent = true}))
 		SetVehicleControl(closestvehicle,data)
 	end
 	cb(1)
@@ -240,7 +237,6 @@ NeonCustom = function(type)
 				end
 				Citizen.Wait(155)
 				SetVehicleNeonLightsColour(closestvehicle,r,g,b)
-				print('aa')
 			end
 			return
 		end)
